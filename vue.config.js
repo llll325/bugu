@@ -10,7 +10,7 @@ module.exports = defineConfig({
         target: 'https://buguxingqiu.xyz',     //代理的目标地址
         changeOrigin: true,              //是否设置同源，输入是的
         pathRewrite: {                   //路径重写
-          '/api': 'aaa'                   //选择忽略拦截器里面的内容
+          '/api': ''                   //选择忽略拦截器里面的内容
         }
       }
     }
