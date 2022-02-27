@@ -1,16 +1,24 @@
 <template>
   <div>
-    <nav-header />
+    <main-page />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import navHeader from "./components/navHeader.vue";
+import MainPage from "./views/MainPage.vue";
 export default {
   name: "App",
+  // mounted() {
+  //   this.$router.push("/main");
+  // },
   components: {
-    navHeader,
+    MainPage,
   },
 };
 </script>
-<style></style>
+<style>
+#App {
+  height: 100%;
+}
+</style>
