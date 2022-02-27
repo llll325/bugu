@@ -11,42 +11,42 @@
     ></el-col>
     <el-col :span="3"
       ><div class="grid-content bg-purple">
-        <router-link class="register" active-class="active" to="/register"
+        <router-link class="register" active-class="active" to="/home"
           >首页</router-link
         >
       </div></el-col
     >
     <el-col :span="3"
       ><div class="grid-content bg-purple">
-        <router-link class="register" active-class="active" to="/register"
+        <router-link class="register" active-class="active" to="/home"
           >推荐</router-link
         >
       </div></el-col
     >
     <el-col :span="3"
       ><div class="grid-content bg-purple">
-        <router-link class="register" active-class="active" to="/register"
+        <router-link class="register" active-class="active" to="/home"
           >热榜</router-link
         >
       </div></el-col
     >
     <el-col :span="3"
       ><div class="grid-content bg-purple">
-        <router-link class="register" active-class="active" to="/register"
+        <router-link class="register" active-class="active" to="/home"
           >问答</router-link
         >
       </div></el-col
     >
     <el-col :span="6"
       ><div class="grid-content bg-purple">
-        <router-link class="register" active-class="active" to="/register">
+        <router-link class="register" active-class="active" to="/home">
           搜索</router-link
         >
       </div></el-col
     >
     <el-col :span="3"
       ><div class="grid-content bg-purple">
-        <router-link active-class="active" to="/home">登录</router-link>
+        <router-link active-class="active" to="/register">登录</router-link>
       </div></el-col
     >
     <router-view></router-view>

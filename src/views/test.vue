@@ -1,49 +1,45 @@
 <template>
-  <el-form
-    ref="ruleFormRef"
-    :model="ruleForm"
-    status-icon
-    :rules="rules"
-    label-width="120px"
-    class="demo-ruleForm"
-  >
-    <el-form-item label="Password" prop="password">
-      <el-input
-        v-model="password"
-        type="password"
-        autocomplete="off"
-      ></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >登录</el-button
-      >
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-form>
+      <el-input v-model="username"></el-input>
+      <el-input v-model="password"></el-input>
+    </el-form>
+    <!-- <form :model="form" method="post">
+      用户名/学号<br />
+      <input type="text" name="username" /><br />
+      密码<br />
+      <input type="text" name="password" />
+    </form>
+    <input type="checkbox" />记住账号<input type="checkbox" />记住密码<br /> -->
+    <button type="submit" @click="save">立即登录</button>
+  </div>
 </template>
-
-<script lang="ts" setup>
-import { ref, reactive } from "vue";
-import type { ElForm } from "element-plus";
-
-type FormInstance = InstanceType<typeof ElForm>;
-const ruleFormRef = ref<FormInstance>();
-
-const validatePass = (rule: any, value: any, callback: any) => {
-  if (value === "") {
-    callback(new Error("Please input the password"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("checkPass", () => null);
-    }
-    callback();
-  }
+<script>
+import request from "@/utils/request";
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      str: "",
+    };
+  },
+  methods: {
+    save() {
+      request
+        .post("/living/user/login/byPassword", {
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          console.log("test1");
+          console.log(res);
+          this.str = res.data;
+          console.log(this.str);
+        });
+    },
+  },
 };
-
-const ruleForm = reactive({
-  username: "",
-  password: "",
-  checkPass: "",
-});
 </script>
+
+<style></style>
