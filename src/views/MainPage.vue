@@ -2,19 +2,26 @@
   <el-container>
     <el-header> <nav-header></nav-header></el-header>
     <el-container>
-      <el-aside width="100px">Aside</el-aside>
-      <el-main>Main</el-main>
-      <el-aside width="100px">Aside</el-aside>
+      <el-aside width="200px"></el-aside>
+      <el-main>
+        <Main></Main>
+        <Aside></Aside>
+      </el-main>
+      <el-aside width="200px"></el-aside>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import Aside from "@/components/Aside.vue";
 import navHeader from "../components/navHeader.vue";
+import Main from "@/components/Main.vue";
 export default {
   name: "MainPage",
   components: {
     navHeader,
+    Aside,
+    Main,
   },
 };
 </script>
@@ -25,14 +32,16 @@ export default {
 }
 
 .el-aside {
-  background-color: pink;
+  /* background-color: #ddd; */
   color: var(--el-text-color-primary);
   text-align: center;
   line-height: 200px;
-  min-height: 100vh;
+  /* min-height: 90vh; */
+
+  background-color: #fff;
 }
 .el-header {
-  background-color: #b3c0d1;
+  /* background-color: #b3c0d1; */
   color: var(--el-text-color-primary);
   text-align: center;
   line-height: 60px;

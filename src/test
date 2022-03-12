@@ -1,0 +1,416 @@
+<template>
+  <div>
+        <el-tabs :tab-position="tabPosition" style="width: 70%;margin-left: 4%;margin-top: 2%;" type="border-card">
+          <el-tab-pane label="全部">
+            <el-tabs v-model="activeName" @tab-click="handleClick">
+              <el-tab-pane label="最新" name="first">
+                <div v-for="(item,key) in listnew" :key="key">
+                  <el-card>
+                    <el-container>
+                      <el-aside width="80px">
+                        <img style="width:95%;"  src="../../../assets/img/person.png"  />
+                      </el-aside>
+                      <el-main>
+                        <el-row>
+                          <el-col :span="14">
+                            <el-row>
+                              <el-button type="text"
+                                         style="font-size: 22px;color: #373E3D;font-weight: bold"
+                                         @click.native="showUpdate(item.postId)"
+                              >{{item.postTitle}}</el-button>
+                              <el-tag
+                                  v-for="tag in item.tags"
+                                  :key="tag.tag_name"
+                                  effect="plain"
+                                  style="margin-left: 5px;">
+                                {{ tag.tag_name }}
+                              </el-tag>
+                            </el-row>
+                          </el-col>
+                          <el-col :span="10">
+                            <el-col>
+                              <span style="font-size: 10px;">{{item.createTime}}</span>
+                            </el-col>
+                          </el-col>
+                        </el-row>
+                          <el-row>
+                            <el-col :span="6">{{item.nickName}}</el-col>
+                            <el-col :span="6">浏览数:{{item.postBrowses}}</el-col>
+                            <el-col :span="6">回答数:{{item.reply}}</el-col>
+                            <el-col :span="4" >
+                              <el-button type="warning" icon="el-icon-thumb" circle
+                                         @click.native="addPostLike(item.postId);">{{item.wlike}}</el-button>
+                            </el-col>
+                          </el-row>
+                      </el-main>
+                    </el-container>
+                  </el-card>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="最热" name="second">
+                <div v-for="(item,key) in listhot" :key="key">
+                  <el-card>
+                    <el-container>
+                      <el-aside width="80px">
+                        <img style="width:95%;"  src="../../../assets/img/person.png"  />
+                      </el-aside>
+                      <el-main>
+                        <el-row>
+                          <el-col :span="14">
+                            <el-row>
+                              <el-button type="text"
+                                         style="font-size: 22px;color: #373E3D;font-weight: bold"
+                                         @click.native="showUpdate(item.postId)"
+                              >{{item.postTitle}}</el-button>
+                              <el-tag
+                                  v-for="tag in item.tags"
+                                  :key="tag.tag_name"
+                                  effect="plain"
+                                  style="margin-left: 5px;">
+                                {{ tag.tag_name }}
+                              </el-tag>
+                            </el-row>
+                          </el-col>
+                          <el-col :span="10">
+                            <el-col>
+                              <span style="font-size: 10px;">{{item.createTime}}</span>
+                            </el-col>
+                          </el-col>
+                        </el-row>
+                          <el-row>
+                            <el-col :span="6">{{item.nickName}}</el-col>
+                            <el-col :span="6">浏览数:{{item.postBrowses}}</el-col>
+                            <el-col :span="6">回答数:{{item.reply}}</el-col>
+                            <el-col :span="4" >
+                              <el-button type="warning" icon="el-icon-thumb" circle
+                                         @click.native="addPostLike(item.postId);">{{item.wlike}}</el-button>
+                            </el-col>
+                          </el-row>
+                      </el-main>
+                    </el-container>
+                  </el-card>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="精华" name="third">
+                <div v-for="(item,key) in listgood" :key="key">
+                  <el-card>
+                    <el-container>
+                      <el-aside width="80px">
+                        <img style="width:95%;"  src="../../../assets/img/person.png"  />
+                      </el-aside>
+                      <el-main>
+                        <el-row>
+                          <el-col :span="14">
+                            <el-row>
+                              <el-button type="text"
+                                         style="font-size: 22px;color: #373E3D;font-weight: bold"
+                                         @click.native="showUpdate(item.postId)"
+                              >{{item.postTitle}}</el-button>
+                              <el-tag
+                                  v-for="tag in item.tags"
+                                  :key="tag.tag_name"
+                                  effect="plain"
+                                  style="margin-left: 5px;">
+                                {{ tag.tag_name }}
+                              </el-tag>
+                            </el-row>
+                          </el-col>
+                          <el-col :span="10">
+                            <el-col>
+                              <span style="font-size: 10px;">{{item.createTime}}</span>
+                            </el-col>
+                          </el-col>
+                        </el-row>
+                        <el-row>
+                          <el-col :span="6">{{item.nickName}}</el-col>
+                          <el-col :span="6">浏览数:{{item.postBrowses}}</el-col>
+                          <el-col :span="6">回答数:{{item.reply}}</el-col>
+                          <el-col :span="4" >
+                            <el-button type="warning" icon="el-icon-thumb" circle
+                                       @click.native="addPostLike(item.postId);">{{item.wlike}}</el-button>
+                          </el-col>
+                        </el-row>
+                      </el-main>
+                    </el-container>
+                  </el-card>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="待回答" name="fourth">
+                <div v-for="(item,key) in listNoR" :key="key">
+                  <el-card>
+                    <el-container>
+                      <el-aside width="80px">
+                        <img style="width:95%;"  src="../../../assets/img/person.png"  />
+                      </el-aside>
+                      <el-main>
+                        <el-row>
+                          <el-col :span="14">
+                            <el-row>
+                              <el-button type="text"
+                                         style="font-size: 22px;color: #373E3D;font-weight: bold"
+                                         @click.native="showUpdate(item.postId)"
+                              >{{item.postTitle}}</el-button>
+                              <el-tag
+                                  v-for="tag in item.tags"
+                                  :key="tag.tag_name"
+                                  effect="plain"
+                                  style="margin-left: 5px;">
+                                {{ tag.tag_name }}
+                              </el-tag>
+                            </el-row>
+                          </el-col>
+                          <el-col :span="10">
+                            <el-col>
+                              <span style="font-size: 10px;">{{item.createTime}}</span>
+                            </el-col>
+                          </el-col>
+                        </el-row>
+                          <el-row>
+                            <el-col :span="6">{{item.nickName}}</el-col>
+                            <el-col :span="6">浏览数:{{item.postBrowses}}</el-col>
+                            <el-col :span="6">回答数:{{item.reply}}</el-col>
+                            <el-col :span="4" >
+                              <el-button type="warning" icon="el-icon-thumb" circle
+                                         @click.native="addPostLike(item.postId);">{{item.wlike}}</el-button>
+                            </el-col>
+                          </el-row>
+                      </el-main>
+                    </el-container>
+                  </el-card>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+          </el-tab-pane>
+          <el-tab-pane label="你的提问">
+            <div v-for="(item,key) in listYourP" :key="key">
+              <el-card>
+                <el-container>
+                  <el-aside width="80px">
+                    <img style="width:95%;"  src="../../../assets/img/person.png"  />
+                  </el-aside>
+                  <el-main>
+                    <el-row>
+                      <el-col :span="14">
+                        <el-row>
+                          <el-button type="text"
+                                     style="font-size: 22px;color: #373E3D;font-weight: bold"
+                                     @click.native="showUpdate(item.postId)"
+                          >{{item.postTitle}}</el-button>
+                          <el-tag
+                              v-for="tag in item.tags"
+                              :key="tag.tag_name"
+                              effect="plain"
+                              style="margin-left: 5px;">
+                            {{ tag.tag_name }}
+                          </el-tag>
+                        </el-row>
+                      </el-col>
+                      <el-col :span="10">
+                        <el-col>
+                          <span style="font-size: 10px;">{{item.createTime}}</span>
+                        </el-col>
+                      </el-col>
+                    </el-row>
+                    <el-row>
+                      <el-col :span="6">{{item.nickName}}</el-col>
+                      <el-col :span="6">浏览数:{{item.postBrowses}}</el-col>
+                      <el-col :span="6">回答数:{{item.reply}}</el-col>
+                      <el-col :span="4" >
+                        <el-button type="warning" icon="el-icon-thumb" circle
+                                   @click.native="addPostLike(item.postId);">{{item.wlike}}</el-button>
+                      </el-col>
+                    </el-row>
+                  </el-main>
+                </el-container>
+              </el-card>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="你的回答">
+            <div v-for="(item,key) in listYourAP" :key="key">
+              <el-card>
+                <el-container>
+                  <el-aside width="80px">
+                    <img style="width:95%;"  src="../../../assets/img/person.png"  />
+                  </el-aside>
+                  <el-main>
+                    <el-row>
+                      <el-col :span="14">
+                        <el-row>
+                          <el-button type="text"
+                                     style="font-size: 22px;color: #373E3D;font-weight: bold"
+                                     @click.native="showUpdate(item.postId)"
+                          >{{item.postTitle}}</el-button>
+                          <el-tag
+                              v-for="tag in item.tags"
+                              :key="tag.tag_name"
+                              effect="plain"
+                              style="margin-left: 5px;">
+                            {{ tag.tag_name }}
+                          </el-tag>
+                        </el-row>
+                      </el-col>
+                      <el-col :span="10">
+                        <el-col>
+                          <span style="font-size: 10px;">{{item.createTime}}</span>
+                        </el-col>
+                      </el-col>
+                    </el-row>
+                    <el-row>
+                      <el-col :span="6">{{item.nickName}}</el-col>
+                      <el-col :span="6">浏览数:{{item.postBrowses}}</el-col>
+                      <el-col :span="6">回答数:{{item.reply}}</el-col>
+                      <el-col :span="4" >
+                        <el-button type="warning" icon="el-icon-thumb" circle
+                                   @click.native="addPostLike(item.postId);">{{item.wlike}}</el-button>
+                      </el-col>
+                    </el-row>
+                  </el-main>
+                </el-container>
+              </el-card>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+  </div>
+
+</template>
+
+<script>
+import ForumPage from "@/views/forum/ForumPage/ForumPage";
+import axios from "axios";
+
+export default {
+  name: "sideLeft",
+
+  components: {
+  },
+  created(){
+   this.getNewPost();
+   this.getHotPost();
+   this.getGoodPost();
+   this.listNoRPost();
+   this.listYourPost();
+   this.listYourAnPost();
+  },
+  data() {
+    return {
+      tabPosition: 'left',
+      activeName: 'first',
+      id:"",
+      listnew:[],
+      listhot:[],
+      listgood:[],
+      listNoR:[],
+      listYourP:[],
+      listYourAP:[],
+      currentPage2: 1,
+      pageSize:3,
+    }
+  },
+  methods: {
+    showUpdate($index){
+      this.$router.push({
+        path:"/forum/reply",
+        query:{
+          showId:$index,
+        }
+      });
+    },
+    handleChange(val) {
+      console.log(val);
+    },
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
+    handleSizeChange1(val) {
+      // console.log(`每页 ${val} 条`);
+      this.pageSize = val;    //动态改变
+    },
+    handleCurrentChange1(val) {
+      // console.log(`当前页: ${val}`);
+      this.currentPage2 = val;    //动态改变
+    },
+
+    //获取最新的评论
+    getNewPost() {
+      this.api({
+        url: "/post/listNewPost",
+        method: "post",
+      }).then(data => {
+        this.listnew = data.list;
+      })
+    },
+    //获取最热的评论
+    getHotPost() {
+      this.api({
+        url: "/post/listHotPost",
+        method: "post",
+      }).then(data => {
+        this.listhot = data.list;
+      })
+    },
+    //获取优质的评论
+    getGoodPost() {
+      this.api({
+        url: "/post/listGoodPost",
+        method: "post",
+      }).then(data => {
+        this.listgood = data.list;
+      })
+    },
+    //获取没有回答的评论
+    listNoRPost() {
+      this.api({
+        url: "/post/listNoRPost",
+        method: "post",
+      }).then(data => {
+        this.listNoR = data.list;
+      })
+    },
+    listYourPost() {
+      this.api({
+        url: "/post/listYourPost",
+        method: "post",
+        data:{
+          userId:this.$store.getters.userId
+        }
+      }).then(data => {
+        this.listYourP = data.list;
+      })
+    },
+    listYourAnPost() {
+      this.api({
+        url: "/post/listYourAnPost",
+        method: "post",
+        data:{
+          userId:this.$store.getters.userId
+        }
+      }).then(data => {
+        this.listYourAP = data.list;
+      })
+    },
+    addPostLike(postId) {
+      this.api({
+        url: "/post/addPostLike",
+        method: "post",
+        data:{
+          postId:postId,
+        }
+      }).then(data => {
+        this.getNewPost();
+        this.getHotPost();
+        this.getGoodPost();
+        this.listNoRPost();
+        this.listYourPost();
+        this.listYourAnPost();
+        this.$message({
+          message: 'Good+1！',
+          type: 'warning'
+        });
+      })
+    },
+  }
+}
+</script>
+
+<style scoped>
+</style>

@@ -5,11 +5,15 @@ const request = axios.create({
     timeout: 5000
 })
 
+// let baseUrl = process.env.NODE_ENV === 'production'?'':'/apiurl';
+
+// this.targetAction =  `${window.location.origin}/api/configurationController/loadConfig`
 // request 拦截器
 // 可以自请求发送前对请求做一些处理
 // 比如统一加token，对请求参数统一加密
 request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
+    config.headers.token = localStorage.getItem("token")
 
     // config.headers['token'] = user.token;  // 设置请求头
     return config
@@ -37,6 +41,20 @@ request.interceptors.response.use(
         return Promise.reject(error)
     }
 )
+// /**
+//  * 可以通过 request.get() 方式调用
+//  */
+//  ['get', 'post', 'put', 'delete', 'patch'].forEach((item)=>{
+// 	request[item] = (url, data, options)=>{
+// 		return request({
+// 			method: item,
+// 			url, 
+// 			data, 
+// 			...options
+// 		})
+// 	}
+// });
+
 
 
 export default request

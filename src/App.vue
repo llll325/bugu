@@ -1,19 +1,37 @@
 <template>
   <div>
-    <main-page />
-    <router-view></router-view>
+    <router-view v-if="showRouter"></router-view>
   </div>
 </template>
 
 <script>
-import MainPage from "./views/MainPage.vue";
+import Login from "./components/Login.vue";
 export default {
   name: "App",
-  // mounted() {
-  //   this.$router.push("/main");
-  // },
+  mounted() {
+    this.$router.push("/login");
+  },
   components: {
-    MainPage,
+    //MainPage,
+    Login,
+  },
+  provide() {
+    return {
+      reload: this.reload,
+    };
+  },
+  data() {
+    return {
+      showRouter: true,
+    };
+  },
+  methods: {
+    reload() {
+      this.showRouter = false;
+      this.$nextTick(function () {
+        this.showRouter = true;
+      });
+    },
   },
 };
 </script>
@@ -22,3 +40,4 @@ export default {
   height: 100%;
 }
 </style>
+
